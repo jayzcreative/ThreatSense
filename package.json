@@ -2,9 +2,9 @@
   "name": "threatsense",
   "version": "1.0.0",
   "scripts": {
-  "build": "npx tailwindcss -i ./input.css -o ./output.css",
-  "dev": "npx tailwindcss -i ./input.css -o ./output.css --watch"
-},
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.19"
   }
