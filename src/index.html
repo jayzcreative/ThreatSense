@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Threat Sense | Fraud Detector</title>
   <link href="./output.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="/images/logo1.png">
+  <link rel="icon" type="image/png" href="images/logo1.png">
   <style>
     html { scroll-behavior: smooth; }
   </style>
 </head>
-<body>
+<body class="overflow-x-hidden w-full">
 
 <section id="home" class="relative w-full h-screen">
 
@@ -18,7 +18,7 @@
   <img src="images/hero.png" alt="Hero Image" class="w-full h-screen object-cover" />
 
   <!-- Header --> <header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/10">
-  <nav class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto">
+   <nav class="flex items-center justify-between px-4 sm:px-6 py-4 max-w-[1440px] mx-auto overflow-hidden">
 
     <div class="flex-shrink-0">
       <a href="#home">
@@ -84,7 +84,7 @@
     
     <div class="flex w-full justify-start px-4">
       <button id="url-btn" onclick="toggleScanner('url')" 
-        class="flex items-center space-x-3 px-8 py-4 bg-slate-900/60 border-t border-x border-slate-700 rounded-t-xl text-white text-sm sm:text-base font-semibold transition-all duration-300">
+        class="flex items-center  space-x-1 sm:space-x-3 px-4 sm:px-8 py-4 bg-slate-900/60 border-t border-x border-slate-700 rounded-t-xl text-white text-sm sm:text-base font-semibold transition-all duration-300">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
@@ -92,7 +92,7 @@
       </button>
       
       <button id="email-btn" onclick="toggleScanner('email')" 
-        class="flex items-center space-x-3 px-8 py-4 text-slate-400 text-sm sm:text-base hover:text-white transition-all duration-300">
+        class="flex items-center  space-x-1 sm:space-x-3 px-4 sm:px-8py-4 text-slate-400 text-sm sm:text-base hover:text-white transition-all duration-300">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
@@ -110,7 +110,7 @@
         />
       </div>
       
-      <button class="whitespace-nowrap bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black py-5 px-12 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20 text-lg uppercase tracking-wider">
+      <button class="whitespace-nowrap bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black py-5 px-6 sm:px-12 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20 text-lg uppercase tracking-wider">
         Scan Now
       </button>
     </div>
