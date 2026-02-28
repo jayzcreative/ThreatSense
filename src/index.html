@@ -8,6 +8,13 @@
   <link rel="icon" type="image/png" href="images/logo1.png">
   <style>
     html { scroll-behavior: smooth; }
+    html, body {
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
   </style>
 </head>
 <body class="overflow-x-hidden w-full">
@@ -18,11 +25,11 @@
   <img src="images/hero.png" alt="Hero Image" class="w-full h-screen object-cover" />
 
   <!-- Header --> <header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/10">
-   <nav class="flex items-center justify-between px-4 sm:px-6 py-4 max-w-[1440px] mx-auto overflow-hidden">
+    <nav class="flex items-center justify-between px-4 sm:px-6 py-4 w-full max-w-[1440px] mx-auto overflow-x-hidden"> 
 
     <div class="flex-shrink-0">
       <a href="#home">
-        <img src="images/logo2.png" alt="logo" class="h-12 md:h-16 lg:h-20 cursor-pointer object-contain">
+         <img src="images/logo2.png" alt="logo" class="h-10 sm:h-12 md:h-16 lg:h-20 w-auto cursor-pointer object-contain flex-shrink-0">
       </a>
     </div>
 
@@ -118,7 +125,7 @@
 </div>
 </section>
 
- <section id="urlscanner" class="relative min-h-screen bg-[#020617] py-24 px-6 scroll-mt-20">
+ <section id="urlscanner" class="relative min-h-screen bg-[#020617] py-24 px-6 scroll-mt-20 overflow-hidden">
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-6xl mx-auto relative z-10">
@@ -203,7 +210,7 @@
   </div>
 </section>
 
-<section id="emailscanner" class="relative min-h-screen bg-[#010413] py-24 px-6 scroll-mt-20 border-t border-white/5">
+<section id="emailscanner" class="relative min-h-screen bg-[#010413] py-24 px-6 scroll-mt-20 border-t border-white/5 overflow-hidden">
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 blur-[140px] rounded-full pointer-events-none"></div>
 
   <div class="max-w-6xl mx-auto relative z-10">
