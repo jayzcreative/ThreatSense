@@ -1,69 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Threat Sense | Fraud Detector</title>
-    <link href="./output.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/images/logo1.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threat Sense | Fraud Detector</title>
+  <link href="./output.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/logo1.png">
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-<body >
- <header class="absolute top-0 left-0 w-full z-20 bg-black bg-opacity-50">
-  <nav class="flex items-center justify-between px-6 py-4">
-    
-    <!-- Logo -->
-    <div>
-       <img src="/images/logo2.png" alt="logo" class="h-16 md:h-28 cursor-pointer">
+<body>
+
+<section id="home" class="relative w-full h-screen">
+
+  <!-- Hero Image -->
+  <img src="/images/hero.png" alt="Hero Image" class="w-full h-screen object-cover" />
+
+  <!-- Header -->
+ <header class="absolute top-0 left-0 w-full z-20 bg-black/50 backdrop-blur-sm border-b border-white/5">
+  <nav class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto">
+
+    <div class="flex-shrink-0">
+      <a href="#home">
+        <img src="/images/logo2.png" alt="logo" class="h-12 md:h-16 lg:h-20 cursor-pointer object-contain">
+      </a>
     </div>
 
-    <!-- Nav Links (md and up) -->
-    <div class="hidden md:flex flex-1 justify-center">
-      <ul class="flex space-x-12 text-white font-medium text-xl">
-        <li><a href="#" class="hover:text-cyan-600">Home</a></li>
-        <li><a href="#" class="hover:text-cyan-600">Url Scanner</a></li>
-        <li><a href="#" class="hover:text-cyan-600">Email Scanner</a></li>
-        <li><a href="#" class="hover:text-cyan-600">Help</a></li>
+    <div class="lg:hidden ml-auto mr-4">
+      <a href="#urlscanner" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg text-sm transition-all">
+        Get Started
+      </a>
+    </div>
+
+    <div class="lg:hidden">
+      <button id="hamburger-btn" class="text-white focus:outline-none w-8 h-8 hover:text-cyan-500">
+        <svg id="hamburger-icon" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="hidden lg:flex items-center justify-end flex-grow ml-8">
+      <ul class="flex space-x-8 xl:space-x-12 text-white font-medium text-lg mr-12">
+        <li><a href="#home" class="hover:text-cyan-400 transition-colors">Home</a></li>
+        <li><a href="#urlscanner" class="hover:text-cyan-400 transition-colors">Url Scanner</a></li>
+        <li><a href="#emailscanner" class="hover:text-cyan-400 transition-colors">Email Scanner</a></li>
+        <li><a href="#help" class="hover:text-cyan-400 transition-colors">Help</a></li>
       </ul>
+      <a href="#urlscanner" class="px-6 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-lg shadow-cyan-900/20 transition-all hover:scale-105">
+        Get Started
+      </a>
     </div>
-
-    <!-- Hamburger Menu (small screens only) -->
-     <div class="md:hidden ">
-  <button id="hamburger-btn" class="text-white focus:outline-none relative w-8 h-8 hover:text-cyan-600">
-    <!-- Hamburger Icon -->
-    <svg id="hamburger-icon" class="w-8 h-8 absolute inset-0" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-
-    <!-- X Icon -->
-    <svg id="close-icon" class="w-8 h-8 absolute inset-0 hidden hover:text-cyan-600" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M6 6l12 12M6 18L18 6"></path>
-    </svg>
-  </button>
-</div>
 
   </nav>
 
-  <!-- Mobile Menu -->
- <!-- Mobile Menu -->
-<div id="mobile-menu" class="hidden absolute right-6 top-full mt-2 w-48 bg-black bg-opacity-90 rounded-lg shadow-lg">
-  <ul class="flex flex-col text-white space-y-4 py-4 px-4">
-    <li><a href="#" class="hover:text-cyan-600">Home</a></li>
-    <li><a href="#" class="hover:text-cyan-600">Url Scanner</a></li>
-    <li><a href="#" class="hover:text-cyan-600">Email Scanner</a></li>
-    <li><a href="#" class="hover:text-cyan-600">Help</a></li>
-  </ul>
-</div>
+  <div id="mobile-menu" class="hidden absolute right-6 top-full mt-2 w-56 bg-slate-900/95 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10">
+    <ul class="flex flex-col text-white divide-y divide-white/5">
+      <li><a href="#home" class="block py-4 px-6 hover:bg-cyan-600/20">Home</a></li>
+      <li><a href="#urlscanner" class="block py-4 px-6 hover:bg-cyan-600/20">Url Scanner</a></li>
+      <li><a href="#emailscanner" class="block py-4 px-6 hover:bg-cyan-600/20">Email Scanner</a></li>
+      <li><a href="#help" class="block py-4 px-6 hover:bg-cyan-600/20">Help</a></li>
+    </ul>
+  </div>
 </header>
-<!-- Hero Image -->
-<img 
-  src="/images/hero.png" 
-  alt="Hero Image"
-  class="w-full h-auto object-cover"
-/>
+
+ <!--Hero Text-->
+ <div class="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6 py-20">
+  
+  <h1 class="font-threat text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.05] mb-8">
+    Detect Fraudulent Emails &<br> 
+    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-blue-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+      URLs Instantly
+    </span>
+  </h1>
+  
+  <p class="font-poppins text-sm sm:text-xl md:text-xl text-slate-300 max-w-2xl lg:max-w-3xl opacity-90 tracking-wide leading-relaxed mb-16">
+    AI-powered protection against phishing, scam links & malicious emails.
+  </p>
+
+  <div class="w-full max-w-3xl lg:max-w-4xl flex flex-col items-center">
+    
+    <div class="flex w-full justify-start px-4">
+      <button id="url-btn" onclick="toggleScanner('url')" 
+        class="flex items-center space-x-3 px-8 py-4 bg-slate-900/60 border-t border-x border-slate-700 rounded-t-xl text-white text-sm sm:text-base font-semibold transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <span>Check URL</span>
+      </button>
+      
+      <button id="email-btn" onclick="toggleScanner('email')" 
+        class="flex items-center space-x-3 px-8 py-4 text-slate-400 text-sm sm:text-base hover:text-white transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cyan-400"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span>Check Email</span>
+      </button>
+    </div>
+
+    <div class="flex flex-col md:flex-row w-full p-3 bg-slate-900/40 backdrop-blur-xl border border-slate-700 rounded-b-2xl rounded-tr-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] gap-3">
+      <div class="flex-grow flex items-center border border-slate-700/50 rounded-xl bg-slate-950/30 focus-within:border-cyan-500/50 transition-all">
+        <input 
+          id="scan-input"
+          type="text" 
+          placeholder="Enter website URL" 
+          class="bg-transparent w-full py-5 px-6 text-white text-lg placeholder-slate-500 focus:outline-none"
+        />
+      </div>
+      
+      <button class="whitespace-nowrap bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black py-5 px-12 rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20 text-lg uppercase tracking-wider">
+        Scan Now
+      </button>
+    </div>
+  </div>
+</div>
+</section>
+
 <script src="/src/main.js"></script>
 </body>
 </html>
