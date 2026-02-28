@@ -1,5 +1,6 @@
-/**
+ /**
  * THREATSENSE - MAIN INTERFACE LOGIC
+ * Integrated with FastAPI Backend
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroTabs();
     initDragAndDrop();
     initFaqAccordion();
-    initScanButtons();
+    initScanButtons(); // Updated to connect to Python
 });
 
 /* 1. NAVIGATION & MOBILE MENU */
@@ -57,37 +58,29 @@ function initHeroTabs() {
             emailBtn.classList.remove(...inactiveClasses);
             urlBtn.classList.remove(...activeClasses);
             urlBtn.classList.add(...inactiveClasses);
-            inputField.placeholder = "Enter email address";
+            inputField.placeholder = "Enter email content";
         }
     };
 }
-/* ---------------------------------------------------------
-   3. EMAIL FILE DRAG & DROP (Enhanced)
-   --------------------------------------------------------- */
+
+/* 3. EMAIL FILE DRAG & DROP */
 function initDragAndDrop() {
-    // Target the specific container from your image
     const dropZone = document.querySelector('#emailscanner .border-dashed');
     const dropText = dropZone?.querySelector('p');
     
-    // Create a hidden file input so users can also click to upload
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'file';
-    hiddenInput.accept = '.eml,.msg';
+    hiddenInput.accept = '.eml,.msg,.txt';
     hiddenInput.className = 'hidden';
     document.body.appendChild(hiddenInput);
 
     if (!dropZone) return;
 
-    // Trigger file dialog when clicking the zone
     dropZone.style.cursor = 'pointer';
     dropZone.addEventListener('click', () => hiddenInput.click());
 
-    // Handle file selection via dialog
-    hiddenInput.addEventListener('change', (e) => {
-        handleFiles(e.target.files);
-    });
+    hiddenInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
-    // Prevent default behaviors for drag events
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, e => {
             e.preventDefault();
@@ -95,7 +88,6 @@ function initDragAndDrop() {
         }, false);
     });
 
-    // Visual feedback when dragging over
     ['dragenter', 'dragover'].forEach(eventName => {
         dropZone.addEventListener(eventName, () => {
             dropZone.classList.add('border-indigo-500', 'bg-indigo-500/10', 'scale-[1.01]');
@@ -108,98 +100,133 @@ function initDragAndDrop() {
         });
     });
 
-    // Handle dropped files
-    dropZone.addEventListener('drop', (e) => {
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
+    dropZone.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
 
     function handleFiles(files) {
         if (files.length > 0) {
             const file = files[0];
-            const fileName = file.name.toLowerCase();
-            
-            if (fileName.endsWith('.eml') || fileName.endsWith('.msg')) {
-                // Update UI to show success
-                dropText.innerHTML = `
-                    <span class="flex flex-col items-center gap-2">
-                        <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span class="text-white font-medium">Ready: ${file.name}</span>
-                        <span class="text-xs text-slate-400">Click the analyze button below</span>
-                    </span>`;
-                
-                // Store file data for the "Analyze" button to use
-                dropZone.dataset.fileReady = "true";
-            } else {
-                dropText.innerHTML = `<span class="text-red-400 font-bold">Invalid file type!</span><br><span class="text-xs text-slate-400">Please use .eml or .msg files</span>`;
-            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Store file content to be scanned
+                dropZone.dataset.fileContent = e.target.result;
+                dropText.innerHTML = `<span class="text-green-400 font-medium">Loaded: ${file.name}</span>`;
+            };
+            reader.readAsText(file);
         }
     }
 }
-/* 4. FAQ ACCORDION (Clean Toggle) */
+
+/* 4. FAQ ACCORDION */
 function initFaqAccordion() {
     const faqItems = document.querySelectorAll('#help .group');
-    
     faqItems.forEach(item => {
         const button = item.querySelector('button');
         const content = item.querySelector('.px-6.pb-6');
-        
-        // Ensure content is hidden by default
         content.classList.add('hidden');
 
         button.addEventListener('click', (e) => {
-            // Stop this click from triggering any other listeners
             e.stopPropagation();
-
-            const isCurrentlyHidden = content.classList.contains('hidden');
-            
-            // Close all other FAQ items first
-            faqItems.forEach(otherItem => {
-                otherItem.querySelector('.px-6.pb-6').classList.add('hidden');
-                otherItem.querySelector('svg').style.transform = 'rotate(0deg)';
+            const isHidden = content.classList.contains('hidden');
+            faqItems.forEach(other => {
+                other.querySelector('.px-6.pb-6').classList.add('hidden');
+                other.querySelector('svg').style.transform = 'rotate(0deg)';
             });
-            
-            // Toggle the clicked one
-            if (isCurrentlyHidden) {
+            if (isHidden) {
                 content.classList.remove('hidden');
                 button.querySelector('svg').style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                button.querySelector('svg').style.transform = 'rotate(0deg)';
             }
         });
     });
 }
 
-/* 5. SCAN BUTTON SIMULATION (Targeted Only) */
+/* ---------------------------------------------------------
+   5. BACKEND CONNECTION LOGIC (The "Bridge")
+   --------------------------------------------------------- */
+
 function initScanButtons() {
-    // We only target buttons that are actually meant to perform a scan/analysis
-    // and are NOT part of the FAQ/Help section.
-    const actionButtons = document.querySelectorAll('button:not(#help button):not(#hamburger-btn)');
+    // A. HERO SECTION BUTTON
+    const heroBtn = document.querySelector('#home button.bg-gradient-to-r');
+    const heroInput = document.getElementById('scan-input');
+    if (heroBtn) {
+        heroBtn.addEventListener('click', () => {
+            const mode = heroInput.placeholder.includes("URL") ? 'url' : 'email';
+            performScan(mode, heroInput.value);
+        });
+    }
+
+    // B. URL SECTION BUTTON (Deep Scan)
+    const urlSectionBtn = document.querySelector('#urlscanner button.bg-cyan-600');
+    const urlSectionInput = document.querySelector('#urlscanner input');
+    if (urlSectionBtn) {
+        urlSectionBtn.addEventListener('click', () => {
+            performScan('url', urlSectionInput.value);
+        });
+    }
+
+    // C. EMAIL SECTION BUTTON (Integrity Guard)
+    const emailSectionBtn = document.querySelector('#emailscanner button.bg-indigo-600');
+    const emailSectionInput = document.querySelector('#emailscanner input[type="email"]');
+    if (emailSectionBtn) {
+        emailSectionBtn.addEventListener('click', () => {
+            const dropZone = document.querySelector('#emailscanner .border-dashed');
+            // Prioritize file content if uploaded, otherwise use text input
+            const content = dropZone.dataset.fileContent || emailSectionInput.value;
+            performScan('email', content);
+        });
+    }
+}
+
+async function performScan(type, content) {
+    if (!content || content.trim() === "") {
+        alert("Please provide a URL or Email content to analyze.");
+        return;
+    }
+
+    const endpoint = type === 'url' ? '/scan-url' : '/scan-email';
     
-    actionButtons.forEach(btn => {
-        const text = btn.innerText.toLowerCase();
-        if (text.includes('scan') || text.includes('analyze')) {
-            btn.addEventListener('click', function() {
-                const originalContent = this.innerHTML;
-                this.disabled = true;
-                this.innerHTML = `
-                    <span class="flex items-center justify-center gap-2">
-                        <svg class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Processing...
-                    </span>`;
-                
-                setTimeout(() => {
-                    this.innerHTML = originalContent;
-                    this.disabled = false;
-                    alert("Model Analysis Complete.\nReady to connect to backend.");
-                }, 1500);
-            });
+    // Show a basic loading state
+    console.log(`Scanning ${type}...`);
+
+    try {
+        const response = await fetch(`http://localhost:8000${endpoint}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: content })
+        });
+
+        if (!response.ok) throw new Error("Backend server error");
+
+        const data = await response.json();
+        updateUIWithResults(data);
+
+    } catch (error) {
+        console.error("Connection Error:", error);
+        alert("Could not connect to the AI Engine. Please ensure app.py is running on localhost:8000");
+    }
+}
+
+function updateUIWithResults(data) {
+    // This function updates the "Threat Level" circle in your UI
+    const threatScoreElement = document.querySelector('#urlscanner .text-3xl.font-bold');
+    const threatCircle = document.querySelector('#urlscanner .animate-spin-slow');
+
+    if (threatScoreElement) {
+        threatScoreElement.innerText = `${data.risk_score}%`;
+        
+        // Change color based on risk
+        if (data.risk_score > 70) {
+            threatScoreElement.classList.add('text-red-500');
+            threatCircle?.classList.replace('border-cyan-500', 'border-red-500');
+        } else {
+            threatScoreElement.classList.remove('text-red-500');
+            threatCircle?.classList.replace('border-red-500', 'border-cyan-500');
         }
-    });
+    }
+
+    // Show a final alert with details
+    alert(`
+        SCAN RESULT: ${data.result}
+        Threat Level: ${data.risk_score}%
+        Type: ${data.type}
+    `);
 }
