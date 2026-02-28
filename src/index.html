@@ -17,8 +17,7 @@
   <!-- Hero Image -->
   <img src="/images/hero.png" alt="Hero Image" class="w-full h-screen object-cover" />
 
-  <!-- Header -->
- <header class="absolute top-0 left-0 w-full z-20 bg-black/50 backdrop-blur-sm border-b border-white/5">
+  <!-- Header --> <header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-lg border-b border-white/10">
   <nav class="flex items-center justify-between px-6 py-4 max-w-[1440px] mx-auto">
 
     <div class="flex-shrink-0">
@@ -58,7 +57,7 @@
 
   </nav>
 
-  <div id="mobile-menu" class="hidden absolute right-6 top-full mt-2 w-56 bg-slate-900/95 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10">
+  <div id="mobile-menu" class="hidden fixed right-6 top-20 w-56 bg-slate-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-white/10 z-50">
     <ul class="flex flex-col text-white divide-y divide-white/5">
       <li><a href="#home" class="block py-4 px-6 hover:bg-cyan-600/20">Home</a></li>
       <li><a href="#urlscanner" class="block py-4 px-6 hover:bg-cyan-600/20">Url Scanner</a></li>
@@ -67,7 +66,6 @@
     </ul>
   </div>
 </header>
-
  <!--Hero Text-->
  <div class="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6 py-20">
   
@@ -120,6 +118,298 @@
 </div>
 </section>
 
+ <section id="urlscanner" class="relative min-h-screen bg-[#020617] py-24 px-6 scroll-mt-20">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="text-left mb-12">
+      <h2 class="font-threat text-4xl md:text-5xl font-bold text-white mb-4">URL Analysis Console</h2>
+      <p class="font-poppins text-slate-400 max-w-2xl">
+        Deep-scan URLs for phishing signatures, malicious redirects, and SSL vulnerabilities using our multi-layered AI engine.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-xl">
+          <label class="block text-cyan-400 font-medium mb-4 text-sm uppercase tracking-widest">Target Destination</label>
+          <div class="flex flex-col md:flex-row gap-4">
+            <div class="flex-grow relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <span class="text-slate-500 text-sm">https://</span>
+              </div>
+              <input 
+                type="text" 
+                placeholder="example.com/secure-login" 
+                class="w-full bg-slate-950/50 border border-slate-700 rounded-xl py-4 pl-20 pr-4 text-white focus:outline-none focus:border-cyan-500 transition-all font-mono text-sm"
+              />
+            </div>
+            <button class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-cyan-900/40 whitespace-nowrap">
+              Run Deep Scan
+            </button>
+          </div>
+          
+          <div class="mt-8 pt-8 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500 font-mono">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              System Ready: 12 Nodes Online
+            </div>
+            <div>Latency: 24ms</div>
+          </div>
+        </div>
+
+        <div class="bg-black/40 border border-slate-800 rounded-2xl p-6 font-mono text-sm">
+          <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-2">
+            <span class="text-slate-400">Scan Logs</span>
+            <span class="text-cyan-500/50">v4.0.2</span>
+          </div>
+          <ul class="space-y-2">
+            <li class="text-green-400">[PASS] SSL Certificate is valid.</li>
+            <li class="text-green-400">[PASS] No known blacklists found.</li>
+            <li class="text-yellow-400">[WARN] Suspicious TLD detected (.top).</li>
+            <li class="text-slate-500 italic">Waiting for input...</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-3xl">
+          <h3 class="text-white font-bold mb-6 text-center">Threat Level</h3>
+          <div class="relative flex justify-center items-center h-32">
+             <div class="absolute inset-0 border-8 border-slate-800 rounded-full"></div>
+             <div class="absolute inset-0 border-8 border-cyan-500 rounded-full clip-path-half animate-spin-slow"></div>
+             <span class="text-3xl font-bold text-white">0%</span>
+          </div>
+          <p class="text-center text-xs text-slate-500 mt-4 uppercase tracking-tighter">Enter URL to evaluate risk score</p>
+        </div>
+
+        <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-3xl">
+          <h3 class="text-white font-semibold mb-4 text-sm">Global Recent Scans</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-400 truncate w-32">amazon-support.ru</span>
+              <span class="px-2 py-1 bg-red-500/10 text-red-500 text-[10px] font-bold rounded">MALICIOUS</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-400 truncate w-32">paypal.com</span>
+              <span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded">SAFE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="emailscanner" class="relative min-h-screen bg-[#010413] py-24 px-6 scroll-mt-20 border-t border-white/5">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 blur-[140px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="text-left mb-12">
+      <h2 class="font-threat text-4xl md:text-5xl font-bold text-white mb-4">Email Integrity Guard</h2>
+      <p class="font-poppins text-slate-400 max-w-2xl">
+        Verify sender authenticity, check for Pwned database leaks, and analyze header metadata for spoofing attempts.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-slate-900/40 backdrop-blur-md border border-slate-800 p-8 rounded-3xl shadow-xl">
+          <label class="block text-indigo-400 font-medium mb-4 text-sm uppercase tracking-widest">Sender or Content Analysis</label>
+          <div class="flex flex-col gap-4">
+            <div class="relative">
+              <input 
+                type="email" 
+                placeholder="suspicious.sender@domain.com" 
+                class="w-full bg-slate-950/50 border border-slate-700 rounded-xl py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all font-mono text-sm"
+              />
+            </div>
+            
+            <div class="border-2 border-dashed border-slate-800 rounded-xl p-8 text-center hover:border-indigo-500/50 transition-colors cursor-pointer bg-slate-950/20">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-slate-600 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <p class="text-sm text-slate-400">Drop <span class="text-indigo-400">.eml</span> or <span class="text-indigo-400">.msg</span> files here to analyze full headers</p>
+            </div>
+
+            <button class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-indigo-900/40 uppercase tracking-widest text-sm">
+              Analyze Email Security
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-red-900/20 to-transparent border border-red-500/20 rounded-2xl p-6">
+          <div class="flex items-start gap-4">
+            <div class="bg-red-500/20 p-2 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold text-sm">Identity Breach Check</h4>
+              <p class="text-xs text-slate-400 mt-1">This email was found in 3 known data breaches (Comcast, LinkedIn 2021). We recommend an immediate password change.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-3xl">
+          <h3 class="text-white font-bold mb-4 text-sm flex items-center gap-2">
+            <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+            Sender Reputation
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-[10px] text-slate-400 mb-1 uppercase">SPF/DKIM Alignment</div>
+              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-indigo-500 h-full w-[85%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-[10px] text-slate-400 mb-1 uppercase">Domain Age</div>
+              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-green-500 h-full w-[40%]"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-[10px] text-slate-400 mb-1 uppercase">Spam Trap History</div>
+              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-yellow-500 h-full w-[10%]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-3xl">
+          <h3 class="text-white font-semibold mb-4 text-sm">Phishing Red Flags</h3>
+          <ul class="text-xs space-y-3">
+            <li class="flex items-center gap-2 text-slate-400">
+              <svg class="h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293l-4 4a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L9 10.586l3.293-3.293a1 1 0 111.414 1.414z"/></svg>
+              No Urgency Keywords
+            </li>
+            <li class="flex items-center gap-2 text-slate-400 opacity-50">
+              <div class="h-4 w-4 border border-slate-600 rounded"></div>
+              Homoglyph Attack Check
+            </li>
+            <li class="flex items-center gap-2 text-slate-400 opacity-50">
+              <div class="h-4 w-4 border border-slate-600 rounded"></div>
+              Malicious Attachment Scan
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="help" class="relative py-24 px-6 bg-[#020617] scroll-mt-20">
+  <div class="max-w-4xl mx-auto relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="font-threat text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Security Intelligence FAQ</h2>
+      <p class="font-poppins text-slate-400">Everything you need to know about our scanning protocols and data privacy.</p>
+    </div>
+
+    <div class="space-y-4">
+      <div class="group bg-slate-900/30 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all">
+        <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none">
+          <span class="text-white font-semibold">How accurate is the AI detection?</span>
+          <svg class="w-5 h-5 text-cyan-500 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed">
+          Our engine utilizes a multi-layered neural network trained on over 500 million verified phishing samples. We maintain a 99.8% detection rate for known malicious patterns.
+        </div>
+      </div>
+
+      <div class="group bg-slate-900/30 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all">
+        <button class="w-full flex items-center justify-between p-6 text-left focus:outline-none">
+          <span class="text-white font-semibold">Is my data stored during a scan?</span>
+          <svg class="w-5 h-5 text-cyan-500 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed">
+          No. We employ a "Zero-Retention" policy. URLs and Email metadata are processed in volatile memory and purged immediately after the analysis report is generated.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ <footer class="bg-[#010413] border-t border-white/10 pt-16 pb-12 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+      
+      <div class="col-span-1">
+        <img src="/images/logo2.png" alt="logo" class="h-12 mb-6 opacity-90">
+        <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+          A specialized fraud detection platform utilizing machine learning models trained on diverse datasets to identify malicious URLs and phishing emails with high precision.
+        </p>
+      </div>
+
+      <div class="flex flex-col md:items-center">
+        <div>
+          <h4 class="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em] text-cyan-500">Analysis Tools</h4>
+          <ul class="space-y-4 text-sm text-slate-400 font-medium">
+            <li><a href="#urlscanner" class="hover:text-cyan-400 transition-colors flex items-center gap-2">
+              <span class="w-1 h-1 bg-cyan-500 rounded-full"></span> URL Deep Scan
+            </a></li>
+            <li><a href="#emailscanner" class="hover:text-cyan-400 transition-colors flex items-center gap-2">
+              <span class="w-1 h-1 bg-cyan-500 rounded-full"></span> Email Integrity Check
+            </a></li>
+            <li><a href="#help" class="hover:text-cyan-400 transition-colors flex items-center gap-2">
+              <span class="w-1 h-1 bg-cyan-500 rounded-full"></span> Methodology & Help
+            </a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:items-end">
+        <div class="bg-slate-900/40 border border-slate-800 p-6 rounded-2xl max-w-xs w-full">
+          <h4 class="text-white font-bold mb-3 text-xs tracking-widest uppercase">Model Context</h4>
+          <p class="text-[11px] text-slate-500 font-mono leading-relaxed italic">
+            Model trained on 1M+ samples of verified phishing and benign data. Optimized for real-time inference.
+          </p>
+          <div class="mt-4 pt-4 border-t border-slate-800/50 flex justify-between items-center">
+             <span class="text-[10px] text-cyan-500/70 font-bold uppercase tracking-tighter">Inference Engine v1.0</span>
+             <span class="text-[10px] text-slate-600 font-mono">2026.02</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+      <div class="space-y-1">
+        <p class="text-slate-500 text-[11px] uppercase tracking-[0.1em]">
+          Powered by JayZCreative
+        </p>
+        <p class="text-slate-600 text-xs">
+          © 2026 ThreatSense. Built for Advanced Fraud Detection.
+        </p>
+      </div>
+      
+     <div class="flex items-center space-x-6 text-slate-500">
+  <a href="https://wa.me/919764506058" target="_blank" class="hover:text-green-500 transition-colors" title="Chat on WhatsApp">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <a href="https://instagram.com/jayzthe_plug" target="_blank" class="hover:text-pink-500 transition-colors" title="Follow on Instagram">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+  </a>
+
+  <a href="https://github.com/jayzcreative" target="_blank" class="hover:text-cyan-400 transition-colors" title="View GitHub">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</footer>
 <script src="/src/main.js"></script>
 </body>
 </html>
